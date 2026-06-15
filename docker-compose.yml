@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: supreme_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: supreme
+      POSTGRES_PASSWORD: supreme
+      POSTGRES_DB: supreme_hardware
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U supreme -d supreme_hardware"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # NOTE: In development, run backend and frontend separately for hot-reload:
+  #   Backend:  cd backend && uvicorn app.main:app --reload --port 8000
+  #   Frontend: cd frontend && npm run dev
+  #
+  # To run everything containerized (production-like), uncomment below:
+  #
+  # backend:
+  #   build: ./backend
+  #   container_name: supreme_backend
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   env_file: ./backend/.env
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - ./backend/uploads:/app/uploads
+  #
+  # frontend:
+  #   build: ./frontend
+  #   container_name: supreme_frontend
+  #   depends_on:
+  #     - backend
+  #   ports:
+  #     - "3000:3000"
+
+volumes:
+  postgres_data:
