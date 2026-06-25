@@ -6,7 +6,7 @@ from functools import lru_cache
 class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "postgresql+asyncpg://supreme:supreme@localhost:5432/supreme_hardware"
-    DATABASE_URL_SYNC: str = "postgresql://supreme:supreme@localhost:5432/supreme_hardware"
+    DATABASE_URL_SYNC: str = "postgresql+pg8000://supreme:supreme@localhost:5432/supreme_hardware"
 
     # JWT
     SECRET_KEY: str = "change-this-in-production-use-openssl-rand-hex-32"

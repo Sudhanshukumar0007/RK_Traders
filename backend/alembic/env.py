@@ -9,15 +9,17 @@ from alembic import context
 from app.core.database import Base
 from app.core.config import settings
 
-# Phase 1 models will be imported here as they're created:
-# from app.models.category import Category
-# from app.models.brand import Brand
-# from app.models.product import Product, ProductVariant, ProductImage, ProductAttribute
+# Phase 1 models — import them all so Alembic sees the full schema
+import app.models.catalog  # noqa: F401 — Category, Brand, Product, ProductVariant, ProductImage, ProductAttribute
+import app.models.user     # noqa: F401 — User, Address
+import app.models.cart     # noqa: F401 — Cart, CartItem
+import app.models.order    # noqa: F401 — Order, OrderItem
 
 config = context.config
 
 # Override sqlalchemy.url from environment (uses sync URL for Alembic)
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL_SYNC)
+# Escape % signs for ConfigParser interpolation (e.g. %40 in URL-encoded passwords → %%40)
+config.set_main_option("sqlalchemy.url", settings.DATABASE_URL_SYNC.replace("%", "%%"))
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)

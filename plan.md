@@ -164,13 +164,6 @@ TASKS:
 
 Confirm full flow works: register → add items to cart at varying quantities (test wholesale threshold) → create order → verify stock decremented.
 
-PHASE 4: Frontend — Storefront UI, Product Showcase & Framer Motion
-Build the customer-facing storefront. This is the most visually important phase — prioritize a clean, modern, trustworthy hardware-store aesthetic (think industrial but polished: clean whites/grays, a strong accent color like safety orange or steel blue, clear typography, generous whitespace). Reference real hardware/industrial e-commerce sites for tone — not flashy, but precise and professional.
-
-PAGES TO BUILD:
-
-1. **Homepage**
-   - Hero section with animated entrance (Framer Motion fade/slide on load)
    - "Shop by Category" grid — animated cards with hover scale/lift effect, category images
    - "Featured Products" carousel/grid — products animate in with staggered entrance (Framer Motion `staggerChildren`), hover reveals quick "Add to Cart" overlay with smooth transition
    - "New Arrivals" section, similarly animated

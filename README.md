@@ -38,7 +38,7 @@ Full-stack e-commerce platform for hardware & plumbing supplies (UPVC fittings, 
 ### 1. Prerequisites
 
 - Docker Desktop (for PostgreSQL)
-- Python 3.12+
+- **Python 3.13** (3.14 not yet supported — asyncpg has no wheels for it)
 - Node.js 20+
 - npm
 
